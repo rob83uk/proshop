@@ -1,21 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import {
-  useParams,
-  useLocation,
-  useNavigate,
-  Navigate,
-  Link
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
-import {
-  Form,
-  Button,
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Card
-} from 'react-bootstrap';
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { createOrder } from '../actions/orderActions';
@@ -33,10 +19,11 @@ const PlaceOrderScreen = () => {
 
   const shippingPrice = itemsPrice > 100 ? 0 : 10;
 
-  const taxPrice = 0.15 * itemsPrice;
+  const taxPrice = (0.15 * itemsPrice).toFixed(2);
 
   const totalPrice =
     Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
+  console.log(totalPrice);
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
@@ -139,7 +126,7 @@ const PlaceOrderScreen = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>£{taxPrice.toFixed(2)}</Col>
+                  <Col>£{taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>

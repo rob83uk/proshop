@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import {
-  useParams,
-  useLocation,
-  useNavigate,
-  Navigate
-} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';

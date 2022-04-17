@@ -1,16 +1,9 @@
 import React, { useEffect } from 'react';
-import {
-  Link,
-  useParams,
-  useNavigate,
-  useLocation,
-  useHistory
-} from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Row,
   Col,
-  Listgroup,
   Image,
   Form,
   Button,
@@ -18,7 +11,6 @@ import {
   ListGroup
 } from 'react-bootstrap';
 import Message from '../components/Message';
-import Loader from '../components/Loader';
 import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const CartScreen = () => {
