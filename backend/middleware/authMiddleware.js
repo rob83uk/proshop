@@ -4,6 +4,7 @@ import User from '../models/userModal.js';
 
 const protect = asyncHandler(async (req, res, next) => {
   let token;
+  console.log('here');
 
   if (
     req.headers.authorization &&
