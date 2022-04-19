@@ -1,41 +1,31 @@
 import express from 'express';
 import multer from 'multer';
-import path from 'path';
+import multerS3 from 'multer-s3';
+import aws from 'aws-sdk';
 
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, 'uploads/');
-  },
-  filename(req, file, cb) {
-    cb(
-      null,
-      `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`
-    );
-  }
+aws.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 });
-function checkFileType(file, cb) {
-  const filetypes = /jpg|jpeg|png/;
-  const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = filetypes.test(file.mimetype);
 
-  if (extname && mimetype) {
-    return cb(null, true);
-  } else {
-    cb('Images only');
-  }
-}
+const s3 = new aws.S3();
 
-const upload = multer({
-  storage,
-  fileFilter: function (req, file, cb) {
-    checkFileType(file, cb);
+const storageS3 = multerS3({
+  s3,
+  bucket: 'proshopapprobc',
+  acl: 'public-read',
+  contentType: multerS3.AUTO_CONTENT_TYPE,
+  key(req, file, cb) {
+    cb(null, file.originalname);
   }
 });
 
-router.post('/', upload.single('image'), (req, res) => {
-  res.send(`/${req.file.path}`);
+const uploadS3 = multer({ storage: storageS3 });
+
+router.post('/', uploadS3.single('image'), (req, res) => {
+  res.send(req.file.location);
 });
 
 export default router;

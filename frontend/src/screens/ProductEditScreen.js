@@ -65,7 +65,6 @@ const ProductEditScreen = () => {
           'Content-Type': 'multipart/form-data'
         }
       };
-
       const { data } = await axios.post('/api/upload', formData, config);
 
       setImage(data);
@@ -99,9 +98,8 @@ const ProductEditScreen = () => {
       </Link>
       <FormContainer>
         <h1>Edit Product</h1>
-        {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
-        {loading ? (
+        {loading || loadingUpdate ? (
           <Loader />
         ) : error ? (
           <Message variant='danger'>{error}</Message>

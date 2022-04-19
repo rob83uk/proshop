@@ -13,12 +13,14 @@ const SearchBox = () => {
     } else {
       navigate('/');
     }
+    setKeyword('');
   };
   return (
     <Form onSubmit={submitHandler} className='d-flex'>
       <Form.Control
         type='text'
         name='q'
+        value={keyword}
         onChange={(e) => setKeyword(e.target.value)}
         placeholder='Search Products'
       ></Form.Control>

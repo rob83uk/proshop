@@ -23,7 +23,6 @@ const PlaceOrderScreen = () => {
 
   const totalPrice =
     Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice);
-  console.log(totalPrice);
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;

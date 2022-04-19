@@ -78,7 +78,6 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
 // @route   GET /api/orders/:id/dispatched
 // @access  Private
 const updateOrderToDispatched = asyncHandler(async (req, res) => {
-  console.log(req.params.id);
   const order = await Order.findById(req.params.id);
   if (order) {
     order.isDelivered = true;

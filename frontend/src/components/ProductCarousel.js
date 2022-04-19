@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Carousel, Image } from 'react-bootstrap';
-import Loader from './Loader';
 import Message from './Message';
 import { listTopProducts } from '../actions/productActions';
 
@@ -16,9 +15,7 @@ const ProductCarousel = () => {
     dispatch(listTopProducts());
   }, [dispatch]);
 
-  return loading ? (
-    <Loader />
-  ) : error ? (
+  return loading ? null : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
     <Carousel pause='hover' className='bg-dark'>

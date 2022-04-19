@@ -38,18 +38,31 @@ const HomeScreen = () => {
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          <Row>
-            {products.map((product) => (
-              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                <Product product={product} />
-              </Col>
-            ))}
-          </Row>
-          <Paginate
-            pages={pages}
-            page={page}
-            keyword={keyword ? keyword : ''}
-          />
+          {!products.length ? (
+            <p>No products found matching '{keyword}'</p>
+          ) : (
+            <>
+              <Row>
+                {products.map((product) => (
+                  <Col
+                    key={product._id}
+                    sm={12}
+                    md={6}
+                    lg={4}
+                    xl={3}
+                    className='align-items-stretch d-flex'
+                  >
+                    <Product product={product} />
+                  </Col>
+                ))}
+              </Row>
+              <Paginate
+                pages={pages}
+                page={page}
+                keyword={keyword ? keyword : ''}
+              />
+            </>
+          )}
         </>
       )}
     </>
