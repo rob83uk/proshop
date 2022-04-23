@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Moment from 'react-moment';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
 import { useParams, Link, Navigate } from 'react-router-dom';
@@ -99,7 +100,10 @@ const OrderScreen = () => {
               </p>
               {order.isDelivered ? (
                 <Message variant='success'>
-                  Delivered on {order.deliveredAt}
+                  Dispatched on{' '}
+                  <Moment format='DD MMM YYYY HH:MM'>
+                    {order.deliveredAt}
+                  </Moment>
                 </Message>
               ) : (
                 <Message variant='danger'>Not Delivered</Message>
@@ -114,7 +118,10 @@ const OrderScreen = () => {
                 {order.paymentMethod}
               </p>
               {order.isPaid ? (
-                <Message variant='success'>Paid on {order.paidAt}</Message>
+                <Message variant='success'>
+                  Paid on{' '}
+                  <Moment format='DD MMM YYYY HH:MM'>{order.paidAt}</Moment>
+                </Message>
               ) : (
                 <Message variant='danger'>Not paid</Message>
               )}

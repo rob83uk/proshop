@@ -47,6 +47,9 @@ const UserEditScreen = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(updateUser({ _id: user._id, name, email, isAdmin }));
+    setName('');
+    setEmail('');
+    setIsAdmin(false);
   };
 
   return (
