@@ -32,13 +32,13 @@ const HomeScreen = () => {
         </Link>
       )}
       <h1>Latest Products</h1>
-      {!products.length ? (
+      {loading ? (
         <Loader />
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
         <>
-          {loading ? (
+          {!products.length ? (
             <p>No products found matching '{keyword}'</p>
           ) : (
             <>
